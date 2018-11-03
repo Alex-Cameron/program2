@@ -1,13 +1,9 @@
-package edu.sdsu.cs;
-//////////
+package edu.sdsu.cs.datastructures;
 
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class BalancedMap<K extends Comparable<K>, V> implements IMap<K, V>{
 
-    //Ask about package edu.sdsu.cs.datastructures
     Map<K, V> map = new TreeMap<>();
 
     public BalancedMap(){
@@ -26,7 +22,6 @@ public class BalancedMap<K extends Comparable<K>, V> implements IMap<K, V>{
 
     @Override
     public boolean add(K key, V value) {
-        //Ask about being full?
         if (map.containsKey(key))
             return false;
         else
@@ -57,7 +52,12 @@ public class BalancedMap<K extends Comparable<K>, V> implements IMap<K, V>{
     @Override
     public Iterable<K> getKeys(V value) {
         List<K> toReturn = new java.util.LinkedList<>();
-        return null;
+        for (Map.Entry<K,V> entry : map.entrySet()){
+            if (value.equals(entry.getValue())){
+                toReturn.add(entry.getKey());
+            }
+        }
+        return toReturn;
     }
 
     @Override
@@ -78,12 +78,18 @@ public class BalancedMap<K extends Comparable<K>, V> implements IMap<K, V>{
     @Override
     public Iterable<K> keyset() {
         List<K> toReturn = new java.util.LinkedList<>();
-        return null;
+        for (Map.Entry<K,V> entry : map.entrySet()){
+            toReturn.add(entry.getKey());
+        }
+        return toReturn;
     }
 
     @Override
     public Iterable<V> values() {
-        List<K> toReturn = new java.util.LinkedList<>();
-        return null;
+        List<V> toReturn = new java.util.LinkedList<>();
+        for (Map.Entry<K,V> entry : map.entrySet()){
+            toReturn.add(entry.getValue());
+        }
+        return toReturn;
     }
 }
